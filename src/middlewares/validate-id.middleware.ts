@@ -5,7 +5,7 @@ export const validateId = (req: Request, res: Response, next: NextFunction): voi
   const id = Number(req.params.id);
 
   if (isNaN(id) || !Number.isInteger(id) || id <= 0) {
-    throw new AppError(400, 'Invalid incident id');
+    return next(new AppError(400, 'Invalid incident id'));
   }
 
   next();

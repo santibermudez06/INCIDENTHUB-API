@@ -6,12 +6,12 @@ export const validateTime = (req: Request, res: Response, next: NextFunction): v
 
   if (estimatedMinutes !== undefined) {
     if (typeof estimatedMinutes !== 'number' || estimatedMinutes <= 0 || estimatedMinutes > 480) {
-      throw new AppError(400, 'estimatedMinutes must be a number greater than 0 and up to 480');
+      return next(new AppError(400, 'estimatedMinutes must be a number greater than 0 and up to 480'));
     }
 
     // Reto 4 - Regla especial para incidentes críticos (máximo 60 min)
     if (priority === 'CRITICAL' && estimatedMinutes > 60) {
-      throw new AppError(400, 'CRITICAL priority incidents cannot exceed 60 estimated minutes');
+      return next(new AppError(400, 'CRITICAL priority incidents cannot exceed 60 estimated minutes'));
     }
   }
 

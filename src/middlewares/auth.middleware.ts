@@ -5,13 +5,13 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction):
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    throw new AppError(401, 'Unauthorized: Missing or invalid token format');
+    return next(new AppError(401, 'Unauthorized: Missing or invalid token format'));
   }
 
   const token = authHeader.split(' ')[1];
 
   if (token !== 'instructor-token' && token !== 'technician-token') {
-    throw new AppError(401, 'Unauthorized: Invalid token');
+    return next(new AppError(401, 'Unauthorized: Invalid token'));
   }
 
   (req as any).user = {

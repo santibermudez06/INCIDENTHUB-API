@@ -5,7 +5,7 @@ export const adminMiddleware = (req: Request, res: Response, next: NextFunction)
   const user = (req as any).user;
 
   if (!user || user.role !== 'admin') {
-    throw new AppError(403, 'Forbidden: Admin access required');
+    return next(new AppError(403, 'Forbidden: Admin access required'));
   }
 
   next();

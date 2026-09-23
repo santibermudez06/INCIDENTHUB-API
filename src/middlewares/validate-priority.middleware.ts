@@ -7,7 +7,7 @@ export const validatePriority = (req: Request, res: Response, next: NextFunction
   const { priority } = req.body;
 
   if (priority && !validPriorities.includes(priority)) {
-    throw new AppError(400, 'Invalid priority value. Must be LOW, MEDIUM, HIGH, or CRITICAL');
+    return next(new AppError(400, 'Invalid priority value. Must be LOW, MEDIUM, HIGH, or CRITICAL'));
   }
 
   next();
