@@ -11,10 +11,10 @@ app.use(express.json());
 app.use(loggerMiddleware);
 app.use(requestInfoMiddleware);
 
-// Rutas base
+// Rutas principales
 app.use('/api/incidents', incidentRoutes);
 
-// Manejo de rutas inexistentes y errores globales
+// Manejo de errores y 404
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
 

@@ -10,14 +10,13 @@ import { adminMiddleware } from '../middlewares/admin.middleware';
 const router = Router();
 const controller = new IncidentController();
 
-// Endpoints especiales (Retos 1, 2 y 3)
+// Endpoints de métricas y filtros
 router.get('/critical', controller.getCritical);
 router.get('/pending', controller.getPending);
 router.get('/stats', controller.getStats);
 
-// Endpoints CRUD principales
+// Endpoints CRUD
 router.get('/', controller.getAll);
-
 router.get('/:id', validateId, controller.getById);
 
 router.post(
@@ -42,7 +41,6 @@ router.patch(
   controller.updateStatus
 );
 
-// Endpoint protegido (requiere autenticación y rol de administrador)
 router.delete(
   '/:id',
   validateId,
